@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Monumentos</title>
+    <link rel="stylesheet" href="../styles.css">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f9;
+        }
+
+        h1 {
+            text-align: center;
+            color: #333;
+            margin-top: 20px;
+            font-size: 2.5em;
+        }
+
+        .container {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            grid-gap: 20px;
+            justify-items: center;
+            padding: 20px;
+        }
+
+        .carss {
+            width: 200px;
+            height: 200px;
+            text-align: center;
+            cursor: pointer;
+            overflow: hidden;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .carss figure {
+            margin: 0;
+            height: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+        }
+
+        .carss img {
+            width: 100%;
+            height: auto;
+            object-fit: cover;
+            transition: transform 0.3s ease-in-out;
+        }
+
+        .carss img:hover {
+            transform: scale(1.05);
+        }
+
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.7);
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+        }
+
+        .modal-content {
+            background-color: white;
+            padding: 20px;
+            border-radius: 8px;
+            width: 60%;
+            max-width: 600px;
+            text-align: center;
+        }
+
+        .close-btn {
+            background-color: #007BFF;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        .close-btn:hover {
+            background-color: #0056b3;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Monumentos</h1>
+    </header>
+
+    <section class="monumentos">
+        <div class="container"></div>
+    </section>
+
+    <div id="modal" class="modal">
+        <div class="modal-content">
+            <h3 id="modal-title">Monumento</h3>
+            <p id="modal-description">Descripción del monumento...</p>
+            <button class="close-btn" onclick="closeModal()">Cerrar</button>
+        </div>
+    </div>
+
+    <script>
+        const monumentos = [
+            { id: "uno", title: "Universario de 1981 - 1996", description: "Este monumento conmemora los 15 años del aniversario de la fundación de la institución." },
+            { id: "tres", title: "Aniversario", description: "Monumento que celebra el aniversario de la institución y su crecimiento a lo largo del tiempo." },
+            { id: "cuatro", title: "Un ambiente con más árboles", description: "Escultura que promueve el cuidado del medio ambiente mediante la plantación de más árboles." },
+            { id: "cinco", title: "Un futuro libre y sin violencia", description: "El monumento refleja la visión de una sociedad sin violencia." },
+            { id: "seis", title: "Aulas académicas", description: "Este monumento simboliza el esfuerzo por mejorar las instalaciones académicas." },
+            { id: "siete", title: "Raíces indígenas", description: "Monumento que rinde homenaje a las culturas indígenas." },
+            { id: "ocho", title: "Científicos más destacados", description: "Escultura que reconoce el trabajo de los científicos más influyentes." },
+            { id: "nueve", title: "Calendario Maya", description: "Monumento que representa el calendario maya y su importancia histórica." },
+            { id: "diez", title: "Establecimiento del laboratorio", description: "Monumento que conmemora el laboratorio de la institución." },
+            { id: "once", title: "Inauguración del CBTA", description: "Monumento que celebra la inauguración del CBTA 134 en 1987." }
+        ];
+
+        const container = document.querySelector(".container");
+
+        monumentos.forEach(monumento => {
+            const card = document.createElement("div");
+            card.classList.add("carss");
+            card.onclick = () => openModal(monumento.id);
+
+            card.innerHTML = `
+                <figure>
+                    <img src="../assets/instalaciones/${monumento.id}.jpg" alt="${monumento.title}">
+                    <figcaption>${monumento.title}</figcaption>
+                </figure>
+            `;
+
+            container.appendChild(card);
+        });
+
+        function openModal(monumentoId) {
+            const monumento = monumentos.find(m => m.id === monumentoId);
+            if (!monumento) return;
+
+            document.querySelector("#modal-title").innerText = monumento.title;
+            document.querySelector("#modal-description").innerText = monumento.description;
+            document.querySelector("#modal").style.display = "flex";
+        }
+
+        function closeModal() {
+            document.querySelector("#modal").style.display = "none";
+        }
+    </script>
+</body>
+</html>

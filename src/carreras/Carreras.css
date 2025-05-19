@@ -1,0 +1,238 @@
+/*Cuerpo del html*/
+html{
+    font-size: 62.5%;
+    }
+    body{
+        background-color: #167560;
+        padding-top: 3rem;
+    }
+    .tex-container{
+        font-size: 1rem;
+    }
+    .container-main {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+    }
+    
+    .carreras {
+        width: 35rem; /* Ancho fijo para cada tarjeta */
+        height: 35rem; /* Alto fijo para cada tarjeta */
+        margin: 2rem; /* Espaciado entre tarjetas */
+        position: relative; /* Necesario para el overlay */
+        overflow: hidden; /* Oculta cualquier parte de la imagen que sobresalga */
+    }
+    
+    .carreras h2 {
+        position: absolute; /* Para posicionar el título sobre la imagen */
+        top: 10px; /* Espaciado desde la parte superior */
+        left: 10px; /* Espaciado desde la izquierda */
+        color: #ff0000; /* Color del texto */
+        z-index: 2; /* Asegura que el título esté por encima de la imagen */
+    }
+    
+    .carreras img {
+        width: 100%; /* La imagen ocupa todo el ancho del contenedor */
+        height: 100%; /* La imagen ocupa todo el alto del contenedor */
+        object-fit: cover; /* Cubre el contenedor sin distorsionar la imagen */
+        filter: blur(4px); /* Aplica desenfoque a la imagen */
+        transition: filter 0.3s; /* Transición suave para el desenfoque */
+        z-index: 1; /* Asegura que la imagen esté detrás del texto */
+    }
+    
+    .carreras:hover img {
+        filter: blur(0); /* Elimina el desenfoque al pasar el mouse sobre la imagen */
+    }
+    
+    .carreras p {
+        position: absolute; /* Para posicionar la descripción sobre la imagen */
+        bottom: 10px; /* Espaciado desde la parte inferior */
+        left: 10px; /* Espaciado desde la izquierda */
+        color: white; /* Color del texto */
+        z-index: 2; /* Asegura que la descripción esté por encima de la imagen */
+    }
+    
+    .overlay {
+        position: absolute; /* Posiciona el texto sobre la imagen */
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        display: flex; /* Usa flexbox para centrar el contenido */
+        flex-direction: column; /* Alinea el texto en columna */
+        justify-content: center; /* Centra verticalmente */
+        align-items: center; /* Centra horizontalmente */
+        color: white; /* Color del texto */
+        background-color: rgba(0, 0, 0, 0.5); /* Fondo semi-transparente */
+        opacity: 0; /* Oculta el overlay inicialmente */
+        transition: opacity 0.3s; /* Transición suave para la opacidad */
+    }
+    
+    .carreras:hover .overlay {
+        opacity: 1; /* Muestra el overlay al pasar el mouse sobre la imagen */
+    }
+
+  /* Estilo para la barra de menú */
+nav {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    width: 100%;
+    background-color: #333;
+    padding: 10px 0;
+    z-index: 1000;
+    display: flex;
+    justify-content: space-between; /* Espacio entre elementos */
+    align-items: center;
+}
+
+nav ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+}
+
+nav ul li {
+    margin: 0 15px;
+    position: relative; /* Necesario para el submenú */
+}
+
+nav ul li a {
+    color: white;
+    text-decoration: none;
+    padding: 10px;
+}
+
+/* Estilos para el submenú */
+nav ul ul {
+    display: none; /* Oculta el submenú por defecto */
+    position: absolute; /* Para que se posicione sobre otros elementos */
+    left: 0; /* Alinea el submenú con el padre */
+    top: 100%; /* Coloca el submenú justo debajo del elemento padre */
+    background-color: #333; /* Color de fondo del submenú */
+    padding: 10px 0; /* Espaciado del submenú */
+    z-index: 1000; /* Asegura que el submenú esté sobre otros elementos */
+}
+
+/* Muestra el submenú al estar activo */
+nav ul li.active > ul {
+    display: block; /* Muestra el submenú */
+}
+
+/* Estilo de los elementos del submenú */
+nav ul ul li {
+    margin: 0; /* Sin margen para los elementos del submenú */
+}
+
+nav ul ul li a {
+    padding: 10px 20px; /* Espaciado para los elementos del submenú */
+    display: block; /* Hace que el enlace ocupe todo el espacio */
+    color: white; /* Color del texto en el submenú */
+}
+
+/* Efecto hover para el submenú */
+nav ul ul li a:hover {
+    background-color: #555; /* Cambio de color al pasar el mouse */
+}
+
+.search-box {
+    margin-right: 20px; /* Separación del borde */
+}
+
+.search-box input[type="text"] {
+    width: 200px;
+    padding: 8px;
+    border: none;
+    border-radius: 4px;
+}
+
+.search-button {
+    padding: 8px 15px;
+    background-color: #555;
+    color: white;
+    border: none;
+    cursor: pointer;
+    border-radius: 4px;
+}
+
+.search-button:hover {
+    background-color: #777;
+}
+
+/* Para asegurarte de que el contenido no quede cubierto por el nav */
+section {
+    min-height: 20vh;
+    padding-top: 4rem; /* Ajuste para que el contenido no quede oculto bajo el nav */
+}
+    /* ********************************** */
+    /*           Responsividad            */
+    /* ********************************** */
+    @media screen and (max-width: 768px) {
+        nav ul {
+            flex-direction: column;
+            align-items: center;
+        }
+    
+        nav ul li {
+            margin: 5px 0;
+        }
+    
+        .search-box input[type="text"] {
+            width: 150px;
+        }
+    }
+    
+    @media screen and (max-width: 480px) {
+        nav ul {
+            flex-direction: column;
+            padding: 0;
+        }
+    
+        nav ul li {
+            margin: 10px 0;
+        }
+    
+        .search-box input[type="text"] {
+            width: 100px;
+        }
+    
+        section {
+            padding-top: 70px; /* Ajuste para móviles */
+        }
+    }
+    /* Etiquetas html*/
+img{
+    display: inline-flex;
+    width: 100%;
+    height: 75%;
+    position: relative;
+}
+li{
+font-size: 2rem;
+}
+p{
+    font-size: 2rem;
+    margin: 1rem;
+}
+h1{
+    font-size: 3rem;
+    margin: 1rem;
+
+}
+div + h1{
+    font-size: larger;
+    margin: 2rem 2rem 1rem 3rem ;    
+}
+h2{
+    font-size: 3rem;
+    margin: 1rem;
+    color: #8bd20f;
+
+}
+h3{
+    font-size: 2rem;
+    margin: 1rem;
+}
